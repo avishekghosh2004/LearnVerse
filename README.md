@@ -67,12 +67,7 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-## 📖 Documentation
-
-For detailed documentation:
-
-- [Frontend Documentation](./frontend/README.md)
-- [Backend Documentation](./backend/README.md)
+=
 
 ## 🤝 Contributing
 
