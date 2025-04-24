@@ -3,36 +3,51 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6 mt-auto">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <h3 className="text-xl font-bold">LearnVerse</h3>
-            <p className="text-gray-400">Empowering minds through education</p>
+    <footer className="bg-gray-800 text-white shadow-lg py-4">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between">
+          {/* Left Section */}
+          <div className="flex flex-col">
+            <h3 className="text-lg font-bold text-white">LearnVerse</h3>
+            <p className="text-blue-100 text-sm">
+              Empowering minds through education
+            </p>
           </div>
-          <div className="flex space-x-6">
-            <Link to="/about" className="hover:text-blue-400 transition-colors">
+
+          {/* Middle Section */}
+          <div className="text-center">
+            <p className="text-blue-100 text-sm">
+              © {new Date().getFullYear()} LearnVerse. All rights reserved.
+            </p>
+          </div>
+
+          {/* Right Section */}
+          <div className="flex items-center space-x-6">
+            <Link
+              to="/about"
+              className="text-blue-100 hover:text-white transition-colors text-sm"
+            >
               About
             </Link>
             <Link
               to="/contact"
-              className="hover:text-blue-400 transition-colors"
+              className="text-blue-100 hover:text-white transition-colors text-sm"
             >
               Contact
             </Link>
-            <Link to="/terms" className="hover:text-blue-400 transition-colors">
+            <Link
+              to="/terms"
+              className="text-blue-100 hover:text-white transition-colors text-sm"
+            >
               Terms
             </Link>
             <Link
               to="/privacy"
-              className="hover:text-blue-400 transition-colors"
+              className="text-blue-100 hover:text-white transition-colors text-sm"
             >
               Privacy
             </Link>
           </div>
-        </div>
-        <div className="mt-4 text-center text-gray-400 text-sm">
-          © {new Date().getFullYear()} LearnVerse. All rights reserved.
         </div>
       </div>
     </footer>
