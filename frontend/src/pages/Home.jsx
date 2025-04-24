@@ -40,7 +40,7 @@ const Home = () => {
       {
         id: 3,
         title: "AWS Cloud Architecture",
-        description: "Design and deploy scalable solutions on AWS",
+        description: "Design and deploy scalable solutions on AWS cloud platform", 
         instructor: "Sarah Wilson",
         price: 129.99,
         image: "https://placehold.co/300x200/e67e22/FFFFFF/png?text=AWS+Cloud",
@@ -51,7 +51,7 @@ const Home = () => {
       {
         id: 4,
         title: "UI/UX Design Fundamentals",
-        description: "Create beautiful and user-friendly interfaces",
+        description: "Create beautiful and user-friendly interfaces and experiences",
         instructor: "Mike Zhang",
         price: 69.99,
         image: "https://placehold.co/300x200/1abc9c/FFFFFF/png?text=UI+Design",
@@ -114,6 +114,39 @@ const Home = () => {
         duration: "42 hours",
         level: "Advanced",
       },
+      {
+        id: 10,
+        title: "Full Stack JavaScript",
+        description: "Master MERN stack development with modern JavaScript",
+        instructor: "Ryan Johnson",
+        price: 129.99,
+        image: "https://placehold.co/300x200/3498db/FFFFFF/png?text=Full+Stack",
+        category: "Web Development",
+        duration: "48 hours",
+        level: "Intermediate",
+      },
+      {
+        id: 11,
+        title: "Cybersecurity Fundamentals",
+        description: "Learn network security, penetration testing, and cyber defense",
+        instructor: "James Wilson",
+        price: 144.99,
+        image: "https://placehold.co/300x200/2c3e50/FFFFFF/png?text=Security",
+        category: "Cybersecurity",
+        duration: "36 hours",
+        level: "Intermediate",
+      },
+      {
+        id: 12,
+        title: "Game Development with Unity",
+        description: "Create 3D games using Unity and C# programming language",
+        instructor: "Sophie Anderson",
+        price: 99.99,
+        image: "https://placehold.co/300x200/16a085/FFFFFF/png?text=Game+Dev",
+        category: "Game Development",
+        duration: "45 hours",
+        level: "Beginner",
+      }
     ],
     []
   );
@@ -132,21 +165,23 @@ const Home = () => {
   );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-dark-primary">
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-6">Available Courses</h1>
+          <h1 className="text-3xl font-bold mb-6 text-dark-text">
+            Available Courses
+          </h1>
           <div className="relative">
             <input
               type="text"
               placeholder="Search courses, categories, or instructors..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 pl-12 pr-4 text-gray-700 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+              className="w-full px-4 py-3 pl-12 pr-4 text-dark-text bg-dark-secondary border-2 border-dark-accent rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-gray-500"
             />
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
-                className="h-6 w-6 text-gray-400"
+                className="h-6 w-6 text-dark-muted"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -161,13 +196,13 @@ const Home = () => {
             </div>
           </div>
           {searchQuery && (
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-dark-muted">
               Found {filteredCourses.length} course(s) matching your search
             </p>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredCourses.map((course) => (
             <CourseCard key={course.id} {...course} />
           ))}

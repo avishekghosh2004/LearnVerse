@@ -38,26 +38,46 @@ const Register = () => {
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else {
-      const passwordErrors = [];
-      if (formData.password.length < 8) {
-        passwordErrors.push("At least 8 characters");
+      const passwordChecks = {
+        length: formData.password.length >= 8,
+        uppercase: /[A-Z]/.test(formData.password),
+        lowercase: /[a-z]/.test(formData.password),
+        number: /[0-9]/.test(formData.password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password)
+      };
+
+      const failedChecks = Object.entries(passwordChecks)
+        .filter(([, passes]) => !passes)
+        .map(([check]) => {
+          switch (check) {
+            case 'length': return 'at least 8 characters';
+            case 'uppercase': return 'one uppercase letter';
+            case 'lowercase': return 'one lowercase letter';
+            case 'number': return 'one number';
+            case 'special': return 'one special character';
+            default: return '';
+          }
+        });
+
+      if (failedChecks.length > 0) {
+        newErrors.password = `Password must contain: ${failedChecks.join(', ')}`;
       }
-      if (!/[A-Z]/.test(formData.password)) {
-        passwordErrors.push("One uppercase letter");
+
+      // Check for common passwords
+      const commonPasswords = ['password123', 'admin123', '12345678', 'qwerty123'];
+      if (commonPasswords.includes(formData.password.toLowerCase())) {
+        newErrors.password = 'Password is too common. Please choose a unique password.';
       }
-      if (!/[a-z]/.test(formData.password)) {
-        passwordErrors.push("One lowercase letter");
+
+      // Check for repeated characters
+      if (/(.)\1{2,}/.test(formData.password)) {
+        newErrors.password = 'Password cannot contain repeated characters (e.g., "aaa")';
       }
-      if (!/[0-9]/.test(formData.password)) {
-        passwordErrors.push("One number");
-      }
-      if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
-        passwordErrors.push("One special character");
-      }
-      if (passwordErrors.length > 0) {
-        newErrors.password = `Password requirements: ${passwordErrors.join(
-          ", "
-        )}`;
+
+      // Check for sequential characters
+      if (/abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz|012|123|234|345|456|567|678|789/i
+        .test(formData.password)) {
+        newErrors.password = 'Password cannot contain sequential characters (e.g., "abc", "123")';
       }
     }
 
@@ -96,18 +116,18 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div className="min-h-screen flex flex-col bg-dark-primary">
       <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6 transform transition-all duration-300 hover:shadow-2xl">
+        <div className="max-w-md w-full bg-dark-secondary rounded-xl shadow-xl p-8 space-y-6 border border-dark-accent/30">
           <div>
-            <h2 className="text-3xl font-bold text-center text-gray-900">
+            <h2 className="text-2xl font-bold text-center text-white">
               Create your account
             </h2>
-            <p className="mt-3 text-center text-gray-600">
+            <p className="mt-2 text-center text-dark-muted">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
+                className="text-blue-400 hover:text-blue-500 transition-colors"
               >
                 Login
               </Link>
@@ -125,7 +145,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-dark-text"
                 >
                   Full Name
                 </label>
@@ -147,7 +167,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-dark-text"
                 >
                   Email address
                 </label>
@@ -169,7 +189,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-dark-text"
                 >
                   Password
                 </label>

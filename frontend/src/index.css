@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+body {
+  background-color: #0f172a; /* dark-primary */
+  color: #f8fafc; /* dark-text */
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #0f172a; /* dark-primary */
+}
+
+/* Custom utility classes */
+.bg-dark-card {
+  background-color: #1e293b;
+}
+
+.text-dark-muted {
+  color: #94a3b8;
+}
+
+.hover-card:hover {
+  transform: scale(1.02);
+  transition: all 300ms ease;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
